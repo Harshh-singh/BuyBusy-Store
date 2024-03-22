@@ -1,3 +1,4 @@
+import Slider from 'react-slick';
 
 function Carousel(){
     return(
