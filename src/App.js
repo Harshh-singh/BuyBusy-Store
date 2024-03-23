@@ -4,6 +4,7 @@ import Home from "./Components/HomePage/Home";
 import Cart from './Components/Cart/cart';
 import Orders from './Components/Orders/orders';
 import Products from './Components/Products/products';
+import { ProductProvider } from './context/productContext';
 
 function App() {
 
@@ -19,7 +20,10 @@ function App() {
   ])
   return (
     <>
+    <ProductProvider>
     <RouterProvider router={router}></RouterProvider>
+    </ProductProvider>
+    
     </>
   );
 }

@@ -7,20 +7,52 @@ function Navbar(){
         <div className={styles.navbar}>
             <div className={styles.logo}>
                 <NavLink to='/'>
-                <img src="https://cdn-icons-png.flaticon.com/128/2273/2273106.png" alt="logo" />
+                <img src="https://cdn-icons-png.flaticon.com/128/862/862072.png"  alt="logo" />
                  <span >Busy Buy</span>
                  </NavLink>
             </div>
             <div className={styles.components}>
-            <NavLink to= '/'>Home</NavLink>
-            <NavLink to= '/products'>Products</NavLink>
-            <NavLink to= '/cart'>Cart</NavLink>           
-            <NavLink to='/orders'>My Orders</NavLink>
+            <NavLink to= '/'
+            style={({isActive})=>{
+                return{
+                    borderBottom: isActive?'3px solid white':"",
+                    padding: isActive?'0px 6px 0px 6px':"",
+                }
+            }}
+            >Home</NavLink>
+
+            <NavLink to= '/products'
+              style={({isActive})=>{
+                return{
+                    borderBottom: isActive?'3px solid white':"",
+                    padding: isActive?'0px 6px 0px 6px':"",
+                }
+            }}
+            >Products</NavLink>
+
+            <NavLink to= '/cart'
+                style={({isActive})=>{
+                    return{
+                        borderBottom: isActive?'3px solid white':"",
+                        padding: isActive?'0px 6px 0px 6px':"",
+                    }
+                }}
+            >Cart</NavLink> 
+
+            <NavLink to='/orders'
+                style={({isActive})=>{
+                    return{
+                        borderBottom: isActive?'3px solid white':"",
+                        padding: isActive?'0px 6px 2px 6px':"",
+                    }
+                }}
+            >Orders</NavLink>
             </div>
             <div className={styles.logout}>
                 <NavLink>
-                <img src="https://cdn-icons-png.flaticon.com/128/6568/6568636.png" alt="logout" />
-               <span> LogOut</span>
+                <span> LogOut</span>
+                <img src="https://cdn-icons-png.flaticon.com/128/10830/10830351.png" alt="logout" />
+               
                </NavLink>
                 </div>
         </div>

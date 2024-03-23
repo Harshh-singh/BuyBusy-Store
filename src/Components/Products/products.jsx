@@ -1,9 +1,17 @@
+import ProductCard from "../ProductCard/productCard";
+import useProduct from "../../context/productContext";
 
 function Products(){
+
+    const {products} = useProduct();
+
     return(
-        <>
-        <h1>All Products</h1>
-        </>
+       products.map((item)=>{
+        return(
+        // console.log(item);
+        <ProductCard category={item.category} image={item.image}></ProductCard>
+        )
+       })
     )
 }
 

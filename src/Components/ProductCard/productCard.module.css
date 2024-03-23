@@ -1,0 +1,19 @@
+.card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2px;
+    height: auto;
+    width: 15vw;
+    border: 1px solid black;
+}
+.card .prodImg{
+    height:10vh;
+}
+.card img{
+    height: 100%;
+}
+.card .prodImg{
+    width: 80%;
+    border: 1px solid black;
+}
