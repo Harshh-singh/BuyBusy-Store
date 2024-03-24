@@ -3,7 +3,7 @@ import Navbar from "./Components/Navbar/navbar";
 import Home from "./Components/HomePage/Home";
 import Cart from './Components/Cart/cart';
 import Orders from './Components/Orders/orders';
-import Products from './Components/Products/products';
+import Products from './Components/Products/productsPage';
 import { ProductProvider } from './context/productContext';
 
 function App() {

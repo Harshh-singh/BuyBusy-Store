@@ -8,6 +8,10 @@ export default function useProduct(){
     return context;
 };
 
+const addToCart = (product) => {
+    console.log(product);
+}
+
     const ProductProvider = ({ children }) => {
 
     const[products, setProducts] = useState([]);
@@ -22,7 +26,7 @@ export default function useProduct(){
 
     return(
         <>
-        <ProductContext.Provider value={{products}}>
+        <ProductContext.Provider value={{products, addToCart}}>
             {children}
         </ProductContext.Provider>
         </>
