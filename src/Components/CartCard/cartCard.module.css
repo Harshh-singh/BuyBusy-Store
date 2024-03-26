@@ -1,0 +1,54 @@
+.card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    min-height: 30rem;
+    max-height: auto;
+    max-width: 20rem;
+    margin: 2vh;
+    padding: 2vw;
+    box-shadow: 0 2px 8px 0 rgba(33, 39, 71, 0.4);
+    border-radius: 10px;
+}
+.card .prodInfo{
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.card .prodImg{
+    height: 15rem;
+    text-align: center;
+}
+.card img{
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+.card button{
+    height: 7vh;
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+    background-color: red;
+    color: white;
+    font-size: 20px;
+    transition: transform 0.2s ease-in-out;
+    /* background-color: black; */
+}
+.card button:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.card .incImg{
+    height: 20px;
+    margin: 4px;
+}
+.card .quantity{
+    display: flex;
+}
+.card .quantity span{
+    font-size: 20px;
+}
