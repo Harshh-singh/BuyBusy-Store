@@ -1,7 +1,11 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import styles from './navbar.module.css';
+import useAuthDetails from '../../context/authDetailsContext';
 
 function Navbar(){
+
+    const {authUser, signout} = useAuthDetails();
+
     return(
         <>
         <div className={styles.navbar}>
@@ -49,11 +53,26 @@ function Navbar(){
             >Orders</NavLink>
             </div>
             <div className={styles.logout}>
-                <NavLink>
-                <span> LogOut</span>
+
+                {authUser?(
+                        <>
+                        <NavLink onClick={signout}>
+                        
+                         <img src="https://cdn-icons-png.flaticon.com/128/13820/13820385.png" alt="logout" />
+                         <span>LogOut</span>
+                        </NavLink>
+                        
+                        </>
+                ):(
+                    <>
+                <NavLink to='/signin'>
+              
                 <img src="https://cdn-icons-png.flaticon.com/128/10830/10830351.png" alt="logout" />
-               
+                <span> LogIn</span>
                </NavLink>
+               </>
+               )}
+                
                 </div>
         </div>
         <Outlet/>

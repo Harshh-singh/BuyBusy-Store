@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { db } from "../firebaseinit";
-import { addDoc, collection, onSnapshot } from "firebase/firestore"; 
+import { addDoc, collection, onSnapshot,deleteDoc, doc } from "firebase/firestore"; 
 import {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
