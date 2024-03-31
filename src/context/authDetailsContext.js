@@ -1,6 +1,9 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebaseinit";
+import {toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+
 //creating new context
 const AuthDetailsContext = createContext();
 
@@ -21,17 +24,20 @@ const AuthDetailsProvider = ({ children }) => {
 
 
     //signing out
-    const signout = (e) => {
+    const signout = async(e) => {
         try{
             e.preventDefault();
             console.log('signout');
-            auth.signOut();
+            await auth.signOut();
+            toast.success("Signed out");
         }catch(err){
+            toast.error("Error signing out");
             console.log('error signing out' + err);
         }
        
     }
 
+    // getting logged in user
         useEffect(()=>{
             const listen = onAuthStateChanged(auth, (user) => {
                 if(user){

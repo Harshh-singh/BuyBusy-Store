@@ -1,9 +1,9 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { db } from "../firebaseinit";
-import { addDoc, collection, onSnapshot,deleteDoc, doc } from "firebase/firestore"; 
+import { collection, doc, onSnapshot, getDoc, updateDoc } from "firebase/firestore"; 
 import {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-
+import useAuthDetails from "./authDetailsContext";
 
 //create new context
 const ProductContext = createContext();
@@ -18,8 +18,12 @@ export default function useProduct(){
 
   const ProductProvider = ({ children }) => {
 
+
+
+    const {authUser} = useAuthDetails();
     const[products, setProducts] = useState([]);
     const[cartItems, setCartItems] = useState([]);
+
 
     //to fetch data from api and shown to product page
     useEffect(()=>{
@@ -33,22 +37,35 @@ export default function useProduct(){
     //to add the selected product to our database in realtime
     const addToCart = async (product) => {
         try{
-        await addDoc(collection(db, "cart"), {
-            id: product.id,
-            title: product.title,
-            price: product.price,
-            image: product.image,
-            description: product.description,
-            category: product.category
-          });
-    
-          toast.success('Item added to cart');
-        }
-        catch(error){
-            console.error("Error writing document: ", error);
+            const userDocRef = doc(db, 'users', authUser.uid);
+            const userDoc = await getDoc(userDocRef);
+            let carts;
+
+            if(userDoc.exists()){
+                carts = userDoc.data().carts;
+            }else{
+                carts = [];
+            }
+
+            carts.push({
+                id: product.id,
+                title: product.title,
+                price: product.price,
+                image: product.image,
+                description: product.description,
+                category: product.category        
+            });
+
+            updateDoc(userDocRef, {
+            carts: carts
+           });
+           toast.success("Item added to cart")
+
+        }catch(err){
+            console.log("Error in setting cart items"+err);
+            toast.error("Failed to add item to cart")
         }
     }
-
 
     //to get products from database and shown to cart
     useEffect(()=> {

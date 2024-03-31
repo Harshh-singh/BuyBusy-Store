@@ -10,7 +10,6 @@ import { ProductProvider } from './context/productContext';
 import { AuthDetailsProvider } from './context/authDetailsContext';
 import ProtectedRoute from './Components/protectedRoutes/protectedRoute';
 
-
 function App() {
 
   const router = createBrowserRouter([

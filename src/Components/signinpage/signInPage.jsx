@@ -4,6 +4,10 @@ import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import styles from './signin.module.css';
+import {toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+
 
 const Signin = () => {
     const [email, setEmail] = useState('');
@@ -11,19 +15,22 @@ const Signin = () => {
 
     const navigate = useNavigate();
 
+    // signing in the user
     const handlesubmit = async(e) =>{
 
         e.preventDefault();
-    
-       await signInWithEmailAndPassword(auth, email, password)
-       .then((userCredential) => {
+      try{
+        // sign in user with email and password 
+       const userCredential = await signInWithEmailAndPassword(auth, email, password)
         console.log(userCredential);
         navigate('/cart');
-       })
-       .catch((error) => {
+        toast.success("Sign in successfully")
+      }
+       catch(error) {
         console.log(error);
         navigate('/signup')
-       })    
+        toast.error("Invalid Email or password");
+       }    
         
         setEmail('');
         setPassword('');
@@ -32,6 +39,7 @@ const Signin = () => {
 return(
 
     <div>
+      <ToastContainer/>
     <div className={styles.signinpage}>
     <h2>Sign In</h2>      
         <form  onSubmit={handlesubmit}>
