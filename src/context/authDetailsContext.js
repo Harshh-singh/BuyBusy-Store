@@ -30,6 +30,7 @@ const AuthDetailsProvider = ({ children }) => {
             console.log('signout');
             await auth.signOut();
             toast.success("Signed out");
+            localStorage.removeItem('user');
         }catch(err){
             toast.error("Error signing out");
             console.log('error signing out' + err);
@@ -42,10 +43,13 @@ const AuthDetailsProvider = ({ children }) => {
             const listen = onAuthStateChanged(auth, (user) => {
                 if(user){
                     setAuthUser(user)
+                    localStorage.setItem('user', JSON.stringify(user));
                 }else{
                     setAuthUser(null)
                 }
             })
+
+            return() => listen();
         }, [])
 
 

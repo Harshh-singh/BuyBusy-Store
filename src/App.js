@@ -17,9 +17,11 @@ function App() {
     children: [
       {path: '', element:<Home/>},
       {path: 'cart', element: <ProtectedRoute/>, children: [
-        {path:"", element: <Cart/>}
+        {path:"", element: <Cart/>},
       ]},
-      {path: 'orders', element: <Orders/>},
+      {path: 'orders', element: <ProtectedRoute/>, children: [
+        {index: true, element: <Orders/>}
+    ]},
       {path: 'products', element: <Products/>},
       {path: 'signup', element: <Signup/>},
       {path:'signin', element: <Signin/>}

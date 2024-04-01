@@ -1,7 +1,9 @@
 import styles from './cartCard.module.css'
-
+import useProduct from '../../context/productContext';
 
 function CartCard({product}){
+
+    const {removeFromCart, increaseQuantity, decreaseQuantity} = useProduct();
    
     return(
         // <>
@@ -16,13 +18,17 @@ function CartCard({product}){
             <p>₹{product.price}</p>
 
             <div className={styles.quantity}>
-                <img src="https://cdn-icons-png.flaticon.com/128/1828/1828899.png" alt="minus" className={styles.incImg}/>
-                <span>1</span>
-                <img src="https://cdn-icons-png.flaticon.com/128/1828/1828919.png" alt="plus" className={styles.incImg}/>
+                <img src="https://cdn-icons-png.flaticon.com/128/1828/1828899.png" alt="minus" className={styles.incImg}
+                onClick={() => decreaseQuantity(product)}
+                />
+                <span>{product.quantity}</span>
+                <img src="https://cdn-icons-png.flaticon.com/128/1828/1828919.png" alt="plus" className={styles.incImg}
+                    onClick={() => increaseQuantity(product)}
+                />
             </div>
 
             <button
-            // onClick={()=>addToCart(product)}
+            onClick={()=>removeFromCart(product)}
             >Remove From Cart</button>
             </div>
         </div>

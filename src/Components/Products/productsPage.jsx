@@ -4,20 +4,26 @@ import styles from './products.module.css'
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-
 function Products(){
 
-    const {products} = useProduct();
+    const {products, loading} = useProduct();
 
     return(
         <>
         <ToastContainer />
-        <div className={styles.productPage}>
+
+        {loading? (
+            <h1>Loading...</h1>
+        ) : (
+
+            <div className={styles.productPage}>
        {products.map((item, index)=>(
         <ProductCard product ={item} key={index}></ProductCard>
        ))}
-
+       
         </div>
+        )}
+        
         
         </>
     )

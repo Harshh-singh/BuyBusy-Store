@@ -6,12 +6,15 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 function Cart(){
-    const {cartItems} = useProduct();    
+    const {cartItems, cartLoading} = useProduct();    
 
     return(
-        
-        <>
-          <ToastContainer/>        
+      <>
+        <ToastContainer/>
+        {cartLoading?(
+          <h1>Loading...</h1>
+        ):(
+                  
         <div className={styles.CartPage}>
         {cartItems.length > 0?cartItems.map((item, index) => (
           <CartCard product={item} key={index}/>
@@ -20,6 +23,8 @@ function Cart(){
           <h1>Cart is empty</h1>
         )}
         </div>
+        )}
+        
         <Outlet/>
         </>
         

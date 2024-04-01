@@ -21,13 +21,11 @@ const Signin = () => {
         e.preventDefault();
       try{
         // sign in user with email and password 
-       const userCredential = await signInWithEmailAndPassword(auth, email, password)
-        console.log(userCredential);
+       await signInWithEmailAndPassword(auth, email, password)
         navigate('/cart');
         toast.success("Sign in successfully")
       }
        catch(error) {
-        console.log(error);
         navigate('/signup')
         toast.error("Invalid Email or password");
        }    
