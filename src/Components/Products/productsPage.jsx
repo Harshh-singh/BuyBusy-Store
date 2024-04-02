@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function Products(){
 
-    const {products, loading} = useProduct();
+    const {products, loading, searchProduct, filterProducts} = useProduct();
 
     return(
         <>
@@ -16,12 +16,67 @@ function Products(){
             <h1>Loading...</h1>
         ) : (
 
-            <div className={styles.productPage}>
-       {products.map((item, index)=>(
-        <ProductCard product ={item} key={index}></ProductCard>
-       ))}
-       
+            <>
+
+            <input type="text"
+                   placeholder="Search Item..." 
+                   className={styles.searchBar}
+                   onChange={(e) => searchProduct(e.target.value)}
+                   />
+
+        <div className={styles.productPage}>
+            
+            <div className={styles.categoryContainer}>
+            <div className={styles.categories}> 
+
+                <h2>Category</h2>
+
+                <label >      
+                    <input type="checkbox"
+                            value="men's clothing"
+                            onChange={(e) => filterProducts(e.target.value, e.target.checked)}
+                     />  
+                    <span>Men's Clothing</span>
+                </label>       
+
+                <label >      
+                    <input type="checkbox"  
+                            value="women's clothing"
+                            onChange={(e) => filterProducts(e.target.value, e.target.checked)}
+                    />  
+                    <span>Women's Clothing</span>
+                </label> 
+
+                <label >      
+                    <input type="checkbox"
+                            value="jewelery"
+                            onChange={(e) => filterProducts(e.target.value, e.target.checked)}
+                    />  
+                    <span>Jewelery</span>
+                </label>
+
+                <label >      
+                    <input type="checkbox" 
+                         value="electronics"
+                         onChange={(e) => filterProducts(e.target.value, e.target.checked)}
+                    />  
+                    <span>Electronics</span>
+                </label>     
+
+            </div>
+            </div>
+
+            <div className={styles.productList}>
+                 {products.map((item, index)=>(
+                    <ProductCard product ={item} key={index}></ProductCard>
+                 ))}          
+            </div>
+
         </div>
+            
+
+        </>
+
         )}
         
         

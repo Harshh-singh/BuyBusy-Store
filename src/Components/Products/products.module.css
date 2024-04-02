@@ -1,7 +1,40 @@
 .productPage{
+    display: flex;
+}
+.categoryContainer{
+    /* border: 1px solid black; */
+    width: 20rem;
+}
+.categories{
+    display: flex;
+    flex-direction: column;
+    height: 12rem;
+    width: 10rem;
+    position: fixed;
+    margin-top: 5rem;
+    padding: 1rem;
+    background-color: lightgray;
+    border-radius: 10px;
+}
+
+.productList{
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+}
+.searchBar{
+    display: flex;
+    margin: 3vh auto;
+    height: 5vh;
+    width: 20vw;
+    font-size: 17px;
+    color: rgb(107, 106, 106);
+    padding: 2px 5px;
+    border-radius: 10px;
+    border: 1px solid #353535;
+}
+.searchBar:focus{
+    outline: none;
 }
 

@@ -24,17 +24,69 @@ export default function useProduct(){
     const[cartItems, setCartItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [cartLoading, setCartLoading] = useState(true);
+    const [totalPrice, setTotalPrice] = useState();
 
     //to fetch data from api and shown to product page
-    useEffect(()=>{
+
+    const fetchAllProducts = async () =>{
+        try{
         fetch('https://fakestoreapi.com/products')
         .then(res => res.json())
         .then(data => 
             setProducts(data),
-            setLoading(false)
         )
-        .catch(error => console.log(error));
-    },[]);
+        .then(setLoading(false))
+        }catch(error){
+            console.log(error);
+        }
+    }
+
+
+    useEffect(()=>{
+        fetchAllProducts();
+    },[setProducts]);
+
+    //to get product with specific category
+    const filterProducts = async(ProductName, isChecked) => {
+
+        try{
+            if(isChecked){
+                const filterProducts = products.filter(product => 
+                    product.title.toLowerCase() === ProductName.toLowerCase() ||
+                    product.category.toLowerCase() === ProductName.toLowerCase()
+                    );
+                    setProducts(filterProducts);
+            }else{
+                fetchAllProducts();
+
+            }
+        }catch(error){
+            toast.error("Error in filter Product");
+        }
+    }
+
+
+    // to search a product in product list
+    const searchProduct = async (Itemname) => {
+
+        console.log(Itemname);
+        console.log(products)
+        try{
+            if(Itemname){
+               const filterProducts = products.filter(product => 
+                product.title.toLowerCase().includes(Itemname.toLowerCase()) ||
+                product.category.toLowerCase().includes(Itemname.toLowerCase())
+                );
+                console.log(filterProducts);
+                setProducts(filterProducts);
+            }else{
+                fetchAllProducts();
+            }
+
+        }catch(error){
+            console.log(error);
+        }
+    }
 
 
      //increase quantity of product in cart
@@ -192,6 +244,18 @@ export default function useProduct(){
         }
     }
 
+
+    // to get total price of cart items
+    useEffect(() => {
+        let newPrice = 0;
+        cartItems.forEach((item) => {
+            newPrice += item.price*item.quantity
+        })
+        setTotalPrice(newPrice);
+    }, [cartItems])
+
+
+
     //to get products from database and shown to cart
     useEffect(()=> {
 
@@ -213,9 +277,9 @@ export default function useProduct(){
         return() => unsubscribe();
                 }
         }catch(error){
-
         console.error("Error fetching data:", error);
-} 
+        } 
+
     }
         fetchdata();   
 
@@ -224,7 +288,7 @@ export default function useProduct(){
 
     return(
         <>
-        <ProductContext.Provider value={{products, addToCart, removeFromCart, increaseQuantity, decreaseQuantity, cartItems, cartLoading, loading}}>
+        <ProductContext.Provider value={{products, searchProduct, filterProducts, addToCart, removeFromCart, increaseQuantity, decreaseQuantity, cartItems, cartLoading, loading, totalPrice}}>
             {children}
         </ProductContext.Provider>
         </>
