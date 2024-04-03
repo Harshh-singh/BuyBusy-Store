@@ -41,4 +41,8 @@
 .card button:hover{
     transform: scale(1.1);
     cursor: pointer;
+    background-color: #454545;
+}
+.card button:active{
+    background-color: #252525;
 }

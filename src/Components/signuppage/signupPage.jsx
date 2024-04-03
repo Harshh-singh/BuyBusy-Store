@@ -33,7 +33,8 @@ const Signup = () => {
           id: user.uid,
           userName: name,
           userEmail: email,
-          carts: []
+          carts: [],
+          orders: []
       })
      .then(() => {
       toast.success("new Account Created");

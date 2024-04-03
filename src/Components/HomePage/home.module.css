@@ -1,5 +1,65 @@
 .homePage{
-    height: 100vh;
+    height: auto;
     display: flex;
     flex-direction: column;  
+    background-color: lightgrey;
+}
+.homePage .categories{
+    padding: 0 1rem;
+    display: flex;
+    margin-top: 1rem;
+    height: 10rem;
+    width: 100%;
+    /* border: 1px solid black; */
+}
+.homePage .categories a{
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    height:100%;
+    width: 100%
+}
+.homePage .categories .category{
+    padding-left: 1rem;
+    margin: 1rem;
+    height: 80%;
+    width: 18%;
+    background-color: white;
+    border-radius: 5px;
+    transition: transform 0.2s ease-in-out;
+}
+.homePage .categories .category span{
+    font-size: 18px;
+}
+.homePage .categories .category:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.homePage .categories .exploreAll {
+    height: 80%;
+    width: 10%;   
+    background-color: #353535;
+    border-radius: 5px;
+    margin: 1rem;
+    color: white;
+    transition: transform 0.2s ease-in-out;
+}
+.homePage .categories .exploreAll a{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.homePage .categories .exploreAll:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.homePage .categories .exploreAll img{
+    object-fit: contain;
+    height: 40%;
+    width: 50%;
+}
+.homePage .categories .exploreAll span{
+    margin-top: 0.5rem;
+    font-size: 17px;
 }

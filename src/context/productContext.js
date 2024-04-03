@@ -20,11 +20,13 @@ export default function useProduct(){
   const ProductProvider = ({ children }) => {
 
     const {authUser} = useAuthDetails();
-    const[products, setProducts] = useState([]);
-    const[cartItems, setCartItems] = useState([]);
+    const [products, setProducts] = useState([]);
+    const [cartItems, setCartItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [cartLoading, setCartLoading] = useState(true);
     const [totalPrice, setTotalPrice] = useState();
+    const [myOrders, setMyOrders] = useState([]);
+    const [ordersLoading, setOrdersLoading] = useState(true);
 
     //to fetch data from api and shown to product page
 
@@ -251,6 +253,7 @@ export default function useProduct(){
         cartItems.forEach((item) => {
             newPrice += item.price*item.quantity
         })
+        newPrice = Math.floor(newPrice);
         setTotalPrice(newPrice);
     }, [cartItems])
 
@@ -286,9 +289,90 @@ export default function useProduct(){
     },[authUser]);
 
 
+    //to purchase items
+    const purchaseItems = async() => {
+        console.log(cartItems);
+        try{
+            if(!authUser){
+                toast.error("Please SignIn");
+            }else{
+            const userDocRef = doc(db, 'users', authUser.uid);
+            const userDoc = await getDoc(userDocRef);
+            let orders;
+
+            if(userDoc.exists()){
+                orders = userDoc.data().orders;
+            }else{
+                orders = [];
+            }
+
+                const orderdItems = cartItems.map(item => ({
+                    title: item.title,
+                    quantity: item.quantity,
+                    price: item.price
+                }))
+
+                const order = {
+                    items: orderdItems,
+                    totalPrice: totalPrice,
+                    date: new Date().toISOString().split('T')[0],
+                }
+
+                orders.push(order);
+
+                await updateDoc(userDocRef, {
+                    orders:orders,
+                    carts: []
+                })
+
+
+                // console.log(orders);
+                toast.success("item Purchased")
+
+            }
+    }catch(error){
+        toast.error("Error in purchasing"+error);   
+    }
+
+    }
+
+    // to get orders from db
+        useEffect(() => {
+
+        const fetchOrders = async() => {
+            try{
+                if(!authUser){
+                    console.log("please Login");
+                }else{
+
+                    const unsubscribe = authUser && onSnapshot(doc(db, 'users', authUser.uid), (userDoc) => {
+                        if (userDoc.exists()) {
+                            setMyOrders(userDoc.data().orders);
+                        } else {
+                            console.log("User document does not exist");
+                        }
+                        setOrdersLoading(false);
+                    })         
+                    return() => unsubscribe();            
+
+                }
+
+            }catch(error){
+                console.log("error"+error);
+            }
+        }
+
+        fetchOrders();
+        },[cartItems])
+
+
+
+
+
     return(
         <>
-        <ProductContext.Provider value={{products, searchProduct, filterProducts, addToCart, removeFromCart, increaseQuantity, decreaseQuantity, cartItems, cartLoading, loading, totalPrice}}>
+        <ProductContext.Provider value={{products, searchProduct, filterProducts, addToCart, removeFromCart, increaseQuantity, decreaseQuantity, cartItems, cartLoading, loading, totalPrice, purchaseItems, myOrders, ordersLoading
+        }}>
             {children}
         </ProductContext.Provider>
         </>

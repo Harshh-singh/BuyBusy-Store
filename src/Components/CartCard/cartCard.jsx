@@ -13,9 +13,8 @@ function CartCard({product}){
                 <img src={product.image} alt={product.title} />
             </div>
             <div className={styles.prodInfo}>
-            <h4>{product.title}</h4>
-
-            <p>₹{product.price}</p>
+            <h3>{product.title}</h3>
+            <h4>${product.price}</h4>
 
             <div className={styles.quantity}>
                 <img src="https://cdn-icons-png.flaticon.com/128/1828/1828899.png" alt="minus" className={styles.incImg}
