@@ -30,6 +30,7 @@ function Products(){
             <div className={styles.categories}> 
 
                 <h2>Category</h2>
+                <span>Select one at a time </span>
 
                 <label >      
                     <input type="checkbox"

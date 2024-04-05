@@ -22,11 +22,12 @@ const Signin = () => {
       try{
         // sign in user with email and password 
        await signInWithEmailAndPassword(auth, email, password)
-        navigate('/cart');
         toast.success("Sign in successfully")
+        setTimeout(() => {
+          navigate('/cart');
+      }, 1000); 
       }
        catch(error) {
-        navigate('/signup')
         toast.error("Invalid Email or password");
        }    
         

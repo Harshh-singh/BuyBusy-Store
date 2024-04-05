@@ -9,52 +9,45 @@
     display: flex;
     margin-top: 1rem;
     height: 10rem;
-    width: 100%;
-    /* border: 1px solid black; */
+    width: auto;
 }
 .homePage .categories a{
     text-decoration: none;
     color: inherit;
     cursor: pointer;
-    height:100%;
-    width: 100%
-}
-.homePage .categories .category{
-    padding-left: 1rem;
+    height:80%;
+    width: 18%; 
     margin: 1rem;
-    height: 80%;
-    width: 18%;
-    background-color: white;
+    padding-left: 1rem;
     border-radius: 5px;
+    background-color: white;
     transition: transform 0.2s ease-in-out;
 }
-.homePage .categories .category span{
+.homePage .categories .a span{
     font-size: 18px;
 }
-.homePage .categories .category:hover{
+.homePage .categories a:hover{
     transform: scale(1.1);
     cursor: pointer;
 }
 .homePage .categories .exploreAll {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     height: 80%;
-    width: 10%;   
+    width: 100%;   
     background-color: #353535;
     border-radius: 5px;
     margin: 1rem;
     color: white;
     transition: transform 0.2s ease-in-out;
 }
-.homePage .categories .exploreAll a{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
 .homePage .categories .exploreAll:hover{
     transform: scale(1.1);
     cursor: pointer;
 }
-.homePage .categories .exploreAll img{
+.homePage .categories a .exploreAll img{
     object-fit: contain;
     height: 40%;
     width: 50%;

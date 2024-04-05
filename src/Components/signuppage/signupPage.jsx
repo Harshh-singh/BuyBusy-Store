@@ -38,14 +38,14 @@ const Signup = () => {
       })
      .then(() => {
       toast.success("new Account Created");
-      console.log("new user created as"+userCredential);
-      navigate('/');   
+      setTimeout(() => {
+        navigate('/');   
+      }, 1000);
      })
           
     })
     .catch((error) => {
         toast.error("Failed to create new user")
-        console.log(error);
     })
 
 

@@ -3,13 +3,12 @@ import Hero from "../Hero/Hero";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { NavLink } from 'react-router-dom';
-import useProduct from '../../context/productContext';
 
 function Home(){
 
-    const {filterProducts} = useProduct();
 
-    return(<>
+    return(
+    <>
         <ToastContainer/>
         <div className={styles.homePage}>
         {/* <h1>This is Home Page</h1> */}
@@ -17,43 +16,44 @@ function Home(){
 
         <div className={styles.categories}>
 
-            <div className={styles.category}>
-                <NavLink to="/products">
+        <NavLink to="/products">
+            <div className={styles.category}>             
                 <h2>Men's wear</h2>
                 <span>Explore Men's fashion</span>
-                </NavLink>
             </div>
+            </NavLink>
 
-            <div className={styles.category}>
             <NavLink to="/products">
+            <div className={styles.category}>
                 <h2>Women's wear</h2>
                 <span>Explore Girls's fashion</span>
-                </NavLink>
             </div>
+            </NavLink>
 
-            
-            <div className={styles.category}>
+
             <NavLink to="/products">
+            <div className={styles.category}>
             <h2>Jewelery</h2>
             <span>Explore Jewelery</span>     
-            </NavLink>      
             </div>
+            </NavLink>      
+
             
-           
-            <div className={styles.category}>
             <NavLink to="/products">
+            <div className={styles.category}>
             <h2>Electronics</h2>
             <span>Explore Electronics</span>
-            </NavLink>
             </div>
-            
+            </NavLink>
 
+            
+            <NavLink to="/products" style={{backgroundColor: "#353535", display: "flex",width: "10%"}}>
             <div className={styles.exploreAll} >
-             <NavLink to="/products">
                 <img src="https://cdn-icons-png.flaticon.com/128/8213/8213451.png" alt="" />
                 <span>See All</span>
-                </NavLink>
             </div>
+            </NavLink>
+
             
         </div>
 

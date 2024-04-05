@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import useProduct from "../../context/productContext";
 import CartCard from "../CartCard/cartCard";
 import styles from './cart.module.css';
@@ -6,7 +6,16 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 function Cart(){
+
     const {cartItems, cartLoading, totalPrice, purchaseItems} = useProduct();    
+    const navigate = useNavigate();
+
+    const redirect = () => {
+      setTimeout(() => {
+        navigate("/orders");
+      }, 2000);
+      purchaseItems();
+    }
 
     return(
       <>
@@ -22,12 +31,12 @@ function Cart(){
 
                <div className={styles.totalPrice}>
                    <span>Total Price:- ${totalPrice}/-</span>
-                   <NavLink to='/orders'>
+                   {/* <NavLink to='/orders'> */}
                    <button 
                    type="submit"
-                   onClick={purchaseItems}
+                   onClick={redirect}
                    >Purchase</button>
-                   </NavLink>
+                   {/* </NavLink> */}
                </div>
 
            </div>

@@ -2,13 +2,12 @@
     display: flex;
 }
 .categoryContainer{
-    /* border: 1px solid black; */
     width: 20rem;
 }
-.categories{
+.categoryContainer .categories{
     display: flex;
     flex-direction: column;
-    height: 12rem;
+    height: auto;
     width: 10rem;
     position: fixed;
     margin-top: 5rem;
@@ -16,7 +15,9 @@
     background-color: lightgray;
     border-radius: 10px;
 }
-
+.categoryContainer .categories span{
+    margin: 0.5rem 0;
+}
 .productList{
     width: 100%;
     display: grid;

@@ -27,7 +27,7 @@ export default function useProduct(){
     const [totalPrice, setTotalPrice] = useState();
     const [myOrders, setMyOrders] = useState([]);
     const [ordersLoading, setOrdersLoading] = useState(true);
-
+    const [selectedCategories, setSelectedCategories] = useState([]);
     //to fetch data from api and shown to product page
 
     const fetchAllProducts = async () =>{
@@ -50,23 +50,36 @@ export default function useProduct(){
 
     //to get product with specific category
     const filterProducts = async(ProductName, isChecked) => {
-
-        try{
-            if(isChecked){
-                const filterProducts = products.filter(product => 
-                    product.title.toLowerCase() === ProductName.toLowerCase() ||
-                    product.category.toLowerCase() === ProductName.toLowerCase()
-                    );
-                    setProducts(filterProducts);
-            }else{
-                fetchAllProducts();
-
+        try {
+          let updatedCategories = [...selectedCategories]; // create a copy of the current categories
+      
+          if (isChecked) {
+            if (!updatedCategories.includes(ProductName)) {
+              updatedCategories.push(ProductName); // add the checked category
             }
-        }catch(error){
-            toast.error("Error in filter Product");
+          } else {
+            const index = updatedCategories.indexOf(ProductName);
+            if (index !== -1) {
+              updatedCategories.splice(index, 1); // remove the unchecked category
+            }
+          }
+      
+          setSelectedCategories(updatedCategories); // update the selected categories state
+      
+          // Filter products based on updatedCategories
+          if (updatedCategories.length > 0) {
+            const filteredProducts = products.filter(product =>
+              updatedCategories.includes(product.category.toLowerCase())
+            );
+            setProducts(filteredProducts);
+          } else {
+            // If no categories are selected, show all products
+            fetchAllProducts();
+          }
+        } catch (error) {
+          toast.error("Error in filter Product");
         }
-    }
-
+      }
 
     // to search a product in product list
     const searchProduct = async (Itemname) => {
@@ -347,7 +360,7 @@ export default function useProduct(){
 
                     const unsubscribe = authUser && onSnapshot(doc(db, 'users', authUser.uid), (userDoc) => {
                         if (userDoc.exists()) {
-                            setMyOrders(userDoc.data().orders);
+                            setMyOrders(userDoc.data().orders.reverse());
                         } else {
                             console.log("User document does not exist");
                         }
