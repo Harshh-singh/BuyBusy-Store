@@ -376,7 +376,7 @@ export default function useProduct(){
         }
 
         fetchOrders();
-        },[cartItems])
+        },[cartItems, authUser])
 
 
 
