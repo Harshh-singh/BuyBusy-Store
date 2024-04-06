@@ -38,15 +38,15 @@ function Orders(){
                                     {item.items.map((product => (
                                         <tr>
                                         <td>{product.title}</td>
-                                        <td>{product.price}</td>
+                                        <td>${product.price}</td>
                                         <td>{product.quantity}</td>
-                                        <td>{product.price}</td>
+                                        <td>${product.price}</td>
                                         </tr>
                                     )))}
                                     
                                     <tr>
                                         <td colSpan="3">Total Price:</td>
-                                        <td>{item.totalPrice}</td>
+                                        <td>${item.totalPrice}</td>
                                     </tr>
                                    
                                 
