@@ -1,3 +1,4 @@
+// using redux
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import Navbar from "./Components/Navbar/navbar";
 import Home from "./Components/HomePage/Home";
