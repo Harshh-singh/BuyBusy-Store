@@ -1,9 +1,9 @@
 import styles from './productCard.module.css';
-import useProduct from '../../context/productContext';
+// import useProduct from '../../context/productContext';
 
 function ProductCard({product}){
 
-    const {addToCart} = useProduct();
+    // const {addToCart} = useProduct();
     
     return(
         // <>
@@ -17,7 +17,7 @@ function ProductCard({product}){
             <h4>${product.price}</h4>
 
             <button
-            onClick={()=>addToCart(product)}
+            // onClick={()=>addToCart(product)}
             >Add to cart</button>
             </div>
         </div>

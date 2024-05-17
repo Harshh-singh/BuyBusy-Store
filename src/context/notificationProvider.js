@@ -1,12 +1,12 @@
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 
-export const showNotification = (message, success) => {
+// export const showNotification = (message, success) => {
 
-    if(success){
-        toast.success(message);
-    }else{
-        toast.error(message);
-    }
+//     if(success){
+//         toast.success(message);
+//     }else{
+//         toast.error(message);
+//     }
     
-}
+// }

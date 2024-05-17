@@ -7,8 +7,8 @@ import Orders from './Components/Orders/orders';
 import Products from './Components/Products/productsPage';
 import Signup from './Components/signuppage/signupPage';
 import Signin from './Components/signinpage/signInPage';
-import { ProductProvider } from './context/productContext';
-import { AuthDetailsProvider } from './context/authDetailsContext';
+// import { ProductProvider } from './context/productContext';
+// import { AuthDetailsProvider } from './context/authDetailsContext';
 import ProtectedRoute from './Components/protectedRoutes/protectedRoute';
 
 function App() {
@@ -32,13 +32,13 @@ function App() {
   ])
   return (
     <>
-    <AuthDetailsProvider>
+    {/* <AuthDetailsProvider> */}
 
-    <ProductProvider>
+    {/* <ProductProvider> */}
     <RouterProvider router={router}></RouterProvider>
-    </ProductProvider>
+    {/* </ProductProvider> */}
     
-    </AuthDetailsProvider>
+    {/* </AuthDetailsProvider> */}
     </>
   );
 }

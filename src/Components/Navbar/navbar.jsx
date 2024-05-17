@@ -1,10 +1,23 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import styles from './navbar.module.css';
-import useAuthDetails from '../../context/authDetailsContext';
+import {useDispatch, useSelector} from 'react-redux';
+import { signOutAsync } from '../../redux/reducers/authenticationReducer';
 
 function Navbar(){
+    const dispatch = useDispatch();
 
-    const {authUser, signout} = useAuthDetails();
+    // get user details from redux
+    const isAuthenticated = useSelector((state) => state.authenticationReducer.isAuthenticated);
+    // const {authUser, signout} = useAuthDetails();
+    console.log(isAuthenticated);
+
+    function handleSignout(){
+        try {
+            dispatch(signOutAsync());
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return(
         <>
@@ -54,9 +67,9 @@ function Navbar(){
             </div>
             <div className={styles.logout}>
 
-                {authUser?(
+                {isAuthenticated?(
                         <>
-                        <NavLink onClick={signout}>
+                        <NavLink onClick={()=>handleSignout()}>
                         
                          <img src="https://cdn-icons-png.flaticon.com/128/13820/13820385.png" alt="logout" />
                          <span>LogOut</span>

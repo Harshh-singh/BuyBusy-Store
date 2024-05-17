@@ -1,15 +1,15 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebaseinit";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import styles from './signin.module.css';
-import {toast} from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { signInAsync } from "../../redux/reducers/authenticationReducer";
 
 
 const Signin = () => {
+    const dispatch = useDispatch();
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -17,20 +17,14 @@ const Signin = () => {
 
     // signing in the user
     const handlesubmit = async(e) =>{
-
         e.preventDefault();
-      try{
-        // sign in user with email and password 
-       await signInWithEmailAndPassword(auth, email, password)
-        toast.success("Sign in successfully")
-        setTimeout(() => {
-          navigate('/cart');
-      }, 1000); 
-      }
-       catch(error) {
-        toast.error("Invalid Email or password");
-       }    
-        
+        // dispatch the signInAsync action
+        try {
+          // .unwrap() simplifies the promise returned from async function
+          await dispatch(signInAsync({ email, password, navigate })).unwrap();
+        } catch (error) {
+          console.error(error);
+        }
         setEmail('');
         setPassword('');
         }
