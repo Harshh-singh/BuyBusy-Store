@@ -1,9 +1,20 @@
 import styles from './productCard.module.css';
 // import useProduct from '../../context/productContext';
+import { useDispatch } from 'react-redux';
+import { addToCartAsync } from '../../redux/reducers/productReducer';
 
 function ProductCard({product}){
 
     // const {addToCart} = useProduct();
+    const dispatch = useDispatch();
+
+   function handleAddToCart(product){
+        // try {
+            dispatch(addToCartAsync(product))
+        // } catch (error) {
+            // console.log(error);
+        // }
+   }
     
     return(
         // <>
@@ -17,7 +28,7 @@ function ProductCard({product}){
             <h4>${product.price}</h4>
 
             <button
-            // onClick={()=>addToCart(product)}
+            onClick={()=>handleAddToCart(product)}
             >Add to cart</button>
             </div>
         </div>

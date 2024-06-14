@@ -41,7 +41,7 @@ function Products(){
                 <h2>Category</h2>
                 <span>Select one at a time </span>
 
-                <label >      
+                <label>      
                     <input type="checkbox"
                             value="men's clothing"
                             // onChange={(e) => filterProducts(e.target.value, e.target.checked)}

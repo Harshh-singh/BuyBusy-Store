@@ -1,10 +1,18 @@
-import useProduct from "../../context/productContext";
 import styles from "./orders.module.css";
+import { fetchOrdersAsync } from "../../redux/reducers/productReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 function Orders(){
 
-    const {myOrders, ordersLoading} = useProduct();
-    console.log(myOrders);
+    const dispatch = useDispatch();
+    const myOrders = useSelector((state) => state.productReducer.myOrders);
+    const ordersLoading = useSelector((state) => state.productReducer.ordersLoading);
+
+    useEffect(()=>{
+        dispatch(fetchOrdersAsync());
+    },[dispatch])
+
     return(
 
         <>
@@ -20,7 +28,7 @@ function Orders(){
                      <>
                      <div className={styles.orderPage}>
                      <h1>Your Orders</h1>
-                     {myOrders.map((item => (
+                     {myOrders.map((item, index) => (
                         <>
                          <h2>Ordered on:- {item.date}</h2>
                          <table className={styles.ordersTable}>
@@ -55,7 +63,7 @@ function Orders(){
                          </table>
                          </>
 
-                     )))}
+                     ))}
 
                 </div>
 

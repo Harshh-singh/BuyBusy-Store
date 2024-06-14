@@ -21,7 +21,6 @@ const ProtectedRoute = ({ children }) => {
 
     return(
         <>
-        {/* {console.log(authUser)} */}
        {isLoggedIn ? (
                 <>{children}<Outlet /></>
             ) : (

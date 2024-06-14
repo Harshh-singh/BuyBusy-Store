@@ -8,8 +8,6 @@ function Navbar(){
 
     // get user details from redux
     const isAuthenticated = useSelector((state) => state.authenticationReducer.isAuthenticated);
-    // const {authUser, signout} = useAuthDetails();
-    console.log(isAuthenticated);
 
     function handleSignout(){
         try {

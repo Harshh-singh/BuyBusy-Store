@@ -1,9 +1,25 @@
 import styles from './cartCard.module.css'
-import useProduct from '../../context/productContext';
+// import useProduct from '../../context/productContext';
+import { removeFromCartAsync } from '../../redux/reducers/productReducer';
+import { useDispatch } from 'react-redux';
+import { increaseProductQuantityAsync } from '../../redux/reducers/productReducer';
+import { decreaseProductQuantityAsync } from '../../redux/reducers/productReducer';
 
 function CartCard({product}){
+    const dispatch = useDispatch();
+    // const {removeFromCart, increaseQuantity, decreaseQuantity} = useProduct();
 
-    const {removeFromCart, increaseQuantity, decreaseQuantity} = useProduct();
+    function handleRemoveFromCart(product){
+        dispatch(removeFromCartAsync(product))
+    }
+
+    function increaseQuantity(product){
+        dispatch(increaseProductQuantityAsync(product))
+    }
+
+    function decreaseQuantity(product){
+        dispatch(decreaseProductQuantityAsync(product))
+    }
    
     return(
         // <>
@@ -27,7 +43,7 @@ function CartCard({product}){
             </div>
 
             <button
-            onClick={()=>removeFromCart(product)}
+            onClick={()=>handleRemoveFromCart(product)}
             >Remove From Cart</button>
             </div>
         </div>
