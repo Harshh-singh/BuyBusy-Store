@@ -37,50 +37,43 @@ function Cart(){
       dispatch(purchaseItemsAsync())
     }
 
-    return(
-      <>
+  return(
+    <>
         <ToastContainer/>
         {cartLoading?(
           <h1>Loading...</h1>
-         ):(
+        ):(
           <>
             <div className={styles.cartPage}>           
-            {totalPrice>0 ?(
-               <div className={styles.priceContainer}>
-               <div className={styles.totalPrice}>
-                   <span>Total Price:- ${totalPrice}/-</span>
-                   {/* <NavLink to='/orders'> */}
-                   <button 
-                      type="submit"
-                      onClick={Purchase}
-                      >Purchase</button>
-                   {/* </NavLink> */}
-               </div>
+              {totalPrice>0 ?(
+                <div className={styles.priceContainer}>
+                  <div className={styles.totalPrice}>
+                    <span>Total Price:- ${totalPrice}/-</span>                    
+                      <button 
+                        type="submit"
+                        onClick={Purchase}
+                      >Purchase</button>                    
+                  </div>
+                </div>
+              ):("")} 
+  
+              <div className={styles.cartList}>
+                {cartItems.length > 0? cartItems.map((item, index) => (
+                  <CartCard product={item} key={index}/> 
+                    )):( 
 
-           </div>
-            ) : ("")} 
-             
-
-            <div className={styles.cartList}>
-
-              {cartItems.length > 0? cartItems.map((item, index) => (
-                 <CartCard product={item} key={index}/> 
-                )) :( 
-
-                    <h1>Cart is empty</h1>
-              )} 
-
+                      <h1>Cart is empty</h1>
+                  )} 
+              </div>
             </div>
-        </div>
 
-        </>
+          </>
 
-        )} 
-        
+        )}        
         <Outlet/>
-        </>
+    </>
         
-       )
+  )
     
 }
 

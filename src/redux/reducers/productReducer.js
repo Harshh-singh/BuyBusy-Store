@@ -5,6 +5,7 @@ import { db } from "../../firebaseinit";
 
 const initialState = {
     products:[],
+    initialProducts:[],
     loading: false,
     error: null,
     cartLoading: true,
@@ -12,7 +13,7 @@ const initialState = {
     getFromCartError: null,
     totalPrice: 0,
     myOrders: [],
-    ordersLoading: true
+    ordersLoading: true,
 };
 
 const productSlice = createSlice({
@@ -31,10 +32,23 @@ const productSlice = createSlice({
             state.myOrders = action.payload;
         },
         filterProduct:(state, action) => {
-
+            if(action.payload === ""){
+                state.products = state.initialProducts
+            }else{
+                state.products = state.products.filter(product=>
+                    product.category.toLowerCase().includes(action.payload.toLowerCase())
+                )
+            }         
         },
         searchProduct:(state, action) => {
-
+            if(action.payload === ""){
+                state.products = state.initialProducts
+            }else{
+                state.products = state.products.filter(product=>
+                    product.title.toLowerCase().includes(action.payload.toLowerCase()) ||
+                    product.category.toLowerCase().includes(action.payload.toLowerCase())
+                )
+            }
         }
     },
 
@@ -46,6 +60,7 @@ const productSlice = createSlice({
         .addCase(fetchProductsAsync.fulfilled, (state, action) => {
             state.loading = false;
             state.products = action.payload;
+            state.initialProducts = action.payload;
         })
         .addCase(fetchProductsAsync.rejected, (state, action) => {
             state.error = action.payload;
